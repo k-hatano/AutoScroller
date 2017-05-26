@@ -1,0 +1,29 @@
+{
+"manifest_version": 2,
+"name": "AutoScroller",
+"version": "1.0",
+"description": "AutoScroller",
+"icons": {
+"16": "autoscroller_16.png",
+"32": "autoscroller_32.png"
+},
+"browser_action": {
+"default_icon": "autoscroller_19.png",
+"default_title": "AutoScroller",
+"default_popup": "popup.html"
+},
+"content_scripts": [
+{
+"matches": ["http://*/*", "https://*/*"],
+"js": ["content.js"],
+"run_at":"document_end"
+}
+],
+"permissions": [
+"tabs",
+"http://*/*",
+"https://*/*",
+"notifications",
+"contextMenus"
+]
+}

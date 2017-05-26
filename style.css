@@ -1,0 +1,11 @@
+body{
+	text-align:center;
+	min-width:128px;
+}
+#table{
+	width:128px;
+}
+#slider{
+	vertical-align:middle;
+	width:128px;
+}
