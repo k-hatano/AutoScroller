@@ -43,10 +43,10 @@ chrome.extension.onMessage.addListener(
 		}else{
 			sendResponse(undefined);
 		}
-});
+	});
 
 var port = chrome.runtime.connect();
-	port.onDisconnect.addListener(function()
-	{
-		popupClosed();
+port.onDisconnect.addListener(function()
+{
+	popupClosed();
 });
