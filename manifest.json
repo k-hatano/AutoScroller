@@ -5,7 +5,8 @@
 	"description": "AutoScroller",
 
      "background": {
-          "scripts": ["background.js"]
+          "scripts": ["background.js"],
+    "persistent": false
      },
 	"icons": {
 		"16": "autoscroller_16.png",
