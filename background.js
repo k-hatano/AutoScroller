@@ -1,5 +1,38 @@
 
+chrome.tabs.onCreated.addListener( function(tabId, info){
+	console.log("onCreated");
+});
+
+chrome.tabs.onUpdated.addListener( function(tabId, info){
+	console.log("onUpdated");
+});
+
+chrome.tabs.onActivated.addListener( function(tabId, info){
+	console.log("onActivated");
+});
+
+chrome.tabs.onHighlighted.addListener( function(tabId, info){
+	console.log("onHighlighted");
+});
+
+chrome.tabs.onDetached.addListener( function(tabId, info){
+	console.log("onDetached");
+});
+
+chrome.tabs.onRemoved.addListener( function(tabId, info){
+	console.log("onRemoved");
+});
+
+chrome.tabs.onReplaced.addListener( function(tabId, info){
+	console.log("onReplaced");
+});
+
+chrome.tabs.onZoomChange.addListener( function(tabId, info){
+	console.log("onZoomChange");
+});
+
 chrome.tabs.onAttached.addListener( function(tabId, info){
+	console.log("onAttached");
 	chrome.tabs.get(tabId, function(tab){
 		chrome.tabs.update(tabId, { 'pinned':false });
 	});
@@ -7,6 +40,7 @@ chrome.tabs.onAttached.addListener( function(tabId, info){
 );
 
 chrome.tabs.onMoved.addListener( function(tabId, info){
+	console.log("onMoved");
 	chrome.tabs.get(tabId, function(tab){
 		if (tab.pinned) {
 			chrome.windows.get(info.windowId, {'populate':true}, function(aWindow){
