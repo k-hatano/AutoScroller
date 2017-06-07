@@ -25,6 +25,7 @@ chrome.tabs.onHighlightChanged.addListener( function(tabId, info){
 
 var lastHighlighted = [];
 var lastHighlightedTime = 0;
+var lastPinnedTime = 0
 
 chrome.tabs.onHighlighted.addListener( function(info){
 	console.log("onHighlighted");
@@ -38,6 +39,7 @@ chrome.tabs.onHighlighted.addListener( function(info){
 				chrome.tabs.get(tmpLastHighlighted[i], function(tab){
 					var pinned = tab.pinned;
 					chrome.tabs.update(tab.id, { 'pinned':!pinned });
+					lastPinnedTime = date.getTime();
 				});
 			}
 		}
@@ -75,7 +77,7 @@ chrome.tabs.onMoved.addListener( function(tabId, info){
 	console.log("onMoved");
 
 	var date = new Date();
-	if (date.getTime() - lastHighlightedTime < 1000 ) {
+	if (date.getTime() - lastPinnedTime < 1000 ) {
 		return;
 	}
 
