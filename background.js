@@ -7,12 +7,34 @@ chrome.tabs.onUpdated.addListener( function(tabId, info){
 	console.log("onUpdated");
 });
 
+chrome.tabs.onSelectionChanged.addListener( function(tabId, info){
+	console.log("onSelectionChanged");
+});
+
+chrome.tabs.onActiveChanged.addListener( function(tabId, info){
+	console.log("onActiveChanged");
+});
+
 chrome.tabs.onActivated.addListener( function(tabId, info){
 	console.log("onActivated");
 });
 
-chrome.tabs.onHighlighted.addListener( function(tabId, info){
+chrome.tabs.onHighlightChanged.addListener( function(tabId, info){
+	console.log("onHighlightChanged");
+});
+
+chrome.tabs.onHighlighted.addListener( function(info){
 	console.log("onHighlighted");
+	chrome.tabs.getAllInWindow(info.windowId, function(tabs){
+		if (info.tabIds.length == tabs.length && tabs.length > 1) {
+			chrome.tabs.get(info.tabIds[0], function(tab){
+				var pinned = tab.pinned;
+				for (var i = 0; i < info.tabIds.length; i++) {
+					chrome.tabs.update(info.tabIds[i], { 'pinned':!pinned });
+				}
+			});
+		}
+	});
 });
 
 chrome.tabs.onDetached.addListener( function(tabId, info){
