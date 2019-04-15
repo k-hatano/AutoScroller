@@ -32,8 +32,22 @@ function popupClosed(){
 	velocityChanged();
 }
 
-document.getElementById("slider").addEventListener("change",velocityChanged,false);
+function goToTop(){
+	chrome.tabs.getSelected(null, function(tab){
+		chrome.tabs.executeScript(tab.id, {code: "window.scrollTo(0,0);"}, function(response){});
+	});
+}
+
+function goToBottom(){
+	chrome.tabs.getSelected(null, function(tab){
+		chrome.tabs.executeScript(tab.id, {code: "window.scrollTo(0,document.body.scrollHeight);"}, function(response){});
+	});
+}
+
+document.getElementById("slider").addEventListener("input",velocityChanged,false);
 document.getElementById("pause").addEventListener("click",popupClosed,false);
+document.getElementById("go_to_top").addEventListener("click",goToTop,false);
+document.getElementById("go_to_bottom").addEventListener("click",goToBottom,false);
 //document.getElementById("slider").addEventListener("mouseleave",popupClosed,false);
 
 chrome.extension.onMessage.addListener(
